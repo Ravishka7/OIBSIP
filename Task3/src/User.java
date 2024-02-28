@@ -56,7 +56,7 @@ public class User {
         Account account = accounts.get("Checking");
         if (account != null) {
             account.setBalance(account.getBalance() + amount);
-            addTransaction(new Transaction("Deposit", amount))
+            addTransaction(new Transaction("Deposit", amount));
         }
     }
 
@@ -74,8 +74,15 @@ public class User {
     }
 
     private void addTransaction(Transaction transaction) {
-        if (transactionCount < 100) {
+        if (transactionCount < transactionHistory.length) {
             transactionHistory[transactionCount++] = transaction;
+        }
+    }
+
+    public void printTransactionHistory() {
+        System.out.println("\nTransaction History:");
+        for (int i = 0; i < transactionCount; i++) {
+            System.out.println(transactionHistory[i]);
         }
     }
 }
